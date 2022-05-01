@@ -10,7 +10,7 @@ INC_DIR=includes
 _INC = pipex.h
 INC = $(patsubst %, $(INC_DIR)/%, $(_INC))
 
-_OBJ = pipex.o
+_OBJ = pipex.o main.o
 OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
 
 all: $(NAME)
