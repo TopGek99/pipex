@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arowe <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/02 14:41:44 by arowe             #+#    #+#             */
+/*   Updated: 2022/05/02 14:41:48 by arowe            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	free_strarray(char **arr)
@@ -39,11 +51,12 @@ char	*find_path(char *cmd[])
 	char	**paths;
 
 	i = 0;
-	while (__environ[i])
+	paths = NULL;
+	while (environ[i])
 	{
-		if (ft_strncmp("PATH=", __environ[i], 5) == 0)
+		if (ft_strncmp("PATH=", environ[i], 5) == 0)
 		{
-			paths = ft_split(__environ[i] + 5, ':');
+			paths = ft_split(environ[i] + 5, ':');
 			break ;
 		}
 		i++;
@@ -70,7 +83,7 @@ void	first_cmd(char *file, int p[2], char **cmd)
 	close(p[0]);
 	dup2(p[1], 1);
 	close(p[1]);
-	execve(command, cmd, __environ);
+	execve(command, cmd, environ);
 }
 
 void	second_cmd(char *file, int p[2], char **cmd, int pid)
@@ -96,7 +109,7 @@ void	second_cmd(char *file, int p[2], char **cmd, int pid)
 	{
 		new_pid = fork();
 		if (new_pid == 0)
-			execve(command, cmd, __environ);
+			execve(command, cmd, environ);
 		else
 			free(command);
 	}

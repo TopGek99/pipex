@@ -10,6 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+int	invalid(int temp, int index, const char *str)
+{
+	return ((temp > temp * 10 || temp > (temp * 10) + (str[index] - '0'))
+		&& ((temp * 10) + (str[index] - '0')) * -1 != -2147483648);
+}
+
 int	ft_atoi(const char *str)
 {
 	int	index;
@@ -31,7 +37,7 @@ int	ft_atoi(const char *str)
 	}
 	while (str[index] >= '0' && str[index] <= '9')
 	{
-		if ((temp > temp * 10 || temp > (temp * 10) + (str[index] - '0')) && ((temp * 10) + (str[index] - '0')) * -1 != -2147483648)
+		if (invalid(temp, index, str))
 			return (-1);
 		temp *= 10;
 		temp += (str[index++] - '0');

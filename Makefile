@@ -3,19 +3,17 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Werror -I$(INC_DIR) -Ilibft/includes
 LDFLAGS=-Llibft -lft
 
-OBJ_DIR=obj
 SRC_DIR=src
 INC_DIR=includes
 
 _INC = pipex.h
 INC = $(patsubst %, $(INC_DIR)/%, $(_INC))
 
-_OBJ = pipex.o main.o
-OBJ = $(patsubst %, $(OBJ_DIR)/%, $(_OBJ))
+OBJ = 	pipex.o main.o
 
 all: $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC)
+%.o: $(SRC_DIR)/%.c $(INC)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(NAME): $(OBJ)
@@ -25,9 +23,9 @@ $(NAME): $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(OBJ_DIR)/*.o
+	rm -f *.o
 
 fclean:
-	rm -f $(OBJ_DIR)/*.o $(NAME)
+	rm -f *.o $(NAME)
 
 re: fclean all

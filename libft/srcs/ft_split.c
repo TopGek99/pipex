@@ -58,13 +58,7 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	k = ft_fillsplit(s, c, split, i);
 	if (k == -1)
-    {
-        i = 0;
-        while (split[i])
-            free(split[i++]);
-        free(split);
-        return (NULL);
-    }
+		return (NULL);
 	split[k] = NULL;
 	return (split);
 }
